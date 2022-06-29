@@ -12,22 +12,29 @@ export default NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch("/your/endpoint", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
+        if (credentials?.email == "test@test.com") {
+          return {
+            ...credentials,
+          };
+        }
+
+        // const res = await fetch("/your/endpoint", {
+        //   method: "POST",
+        //   body: JSON.stringify(credentials),
+        //   headers: { "Content-Type": "application/json" },
+        // });
+        // const user = await res.json();
 
         // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
-        }
+        // if (res.ok && user) {
+        //   return user;
+        // }
         // Return null if user data could not be retrieved
+        console.log(credentials);
         return null;
       },
     }),

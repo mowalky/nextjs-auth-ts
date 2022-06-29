@@ -20,7 +20,9 @@ function AuthForm() {
     console.log(result);
 
     if (!result?.error) {
-      router.replace("/profile");
+      router.replace("/protected");
+    } else {
+      alert("Error: " + result?.error);
     }
   }
 
